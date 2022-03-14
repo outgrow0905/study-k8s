@@ -4,7 +4,7 @@ ex1) '여러 사용자가 동일한 클러스터를 사용하는데, 내가 사�
 ex2) '여러 부서에서 동일한 클러스터를 사용하는데, label이 겹치는 경우'  
 사용자 별, 혹은 부서 별로 독립된 환경에서 클러스터를 사용하는 것이 효율적일 것이다.  
 
-##### namespace 조회
+#### namespace 조회
 namespace를 조회해보면, 이미 몇 개가 생성되어 있는 것을 볼 수 있다.  
 기존에 테스트로 생성한 pod들은 전부 default namespace에 생성된다.  
 또한, 시스템 관련 리소스들은 전부 kube-system namespace로 생성된 것도 확인할 수 있다.
@@ -18,14 +18,14 @@ $ kubectl get po -n kube-system     # 클러스터 세팅관련 pod 들은 kube-
 ~~~
 
 
-##### namespace 생성
+#### namespace 생성
 ~~~sh
 $ kubectl create ns my-namespace
 ~~~
 
 
 
-##### namespace에 pod 생성하기
+#### namespace에 pod 생성하기
 ~~~yaml
 apiVersion: v1
 kind: Pod
