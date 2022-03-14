@@ -21,21 +21,21 @@ label은 리소스에 부여하는 key-value 로써, 이를 참조하여 label s
        protocol: TCP
  ~~~
  
- ### label 전부 조회하기
+ ##### label 전부 조회하기
  ~~~sh
  $ kubectl get po --show-labels
  ~~~
  
  ![label all](./img/label-all.png)
  
- ### 특정 label 조회하기
+ ##### 특정 label 조회하기
 ~~~sh
 $ kubectl get po -L env,key1
 ~~~
 
 ![label specify](./img/label-specify.png)
 
-### 생성된 pod의 label 수정
+##### 생성된 pod의 label 수정
 기존에 이미 같은 label key로 설정이 되어있는 경우, 이를 자동으로 덮어쓰지 않는다.
 
 ~~~sh
@@ -44,7 +44,7 @@ $ kubectl label po label-pod env=beta
 
 ![label fail](./img/label-fail.png)
 
-### 생성된 pod의 label overwrite
+##### 생성된 pod의 label overwrite
 ~~~sh
 $ kubectl label po label-pod env=beta --overwrite
 ~~~
@@ -58,7 +58,7 @@ $ kubectl get po -L env
 ![label overwrite](./img/label-overwrite-success.png)
 
 
-### label selector를 사용한 pod 조회
+##### label selector를 사용한 pod 조회
 ~~~sh
 $ kubectl get po -l env=release                     # env=release 인 조건을 검색
 $ kubectl get po -l env=release,key1=value1         # env=release 이고, key1=value1 인 조건을 검색
@@ -71,7 +71,7 @@ $ kubectl get po -l '!env                           # env label이 세팅된 pod
 label은 pod에만 설정할 수 있는 것이 아니다. k8s 오브젝트에는 대부분 부여할 수 있다.  
 예를 들어, node에도 부여하여 특정 조건(label)의 node에서 pod가 생성되도록 할 수 있다.
 
-### node label 조회
+##### node label 조회
 아래 명령어를 수행하면, 이미 많은 label 들이 기본적으로 설정되어 있는 것을 알 수 있다.  
 주목해야 할 label중 히나는 'kubernetes.io/hostname'이다. 이는 각 node 별로 host 명에 따라 고유하게 설정된다.  
 이 값을 이용하여, 모든 node에 pod를 하나씩 배치할 수도 있고, 반대로 특정 node에 pod를 설치할 수도 있다.
@@ -85,7 +85,7 @@ kubectl get node --show-labels
 
 ![node label all](./img/node-label-all.png)
 
-### node label 설정
+##### node label 설정
 ~~~
 $ kubectl label node hello-kube-002 gpu=true
 $ kubectl get node -l gpu=true -L gpu
@@ -94,7 +94,7 @@ $ kubectl get node -l gpu=true -L gpu
 ![node label gpu](./img/node-label-gpu.png)
 
 
-### gpu label 이 설정된 node에 pod 생성하기
+##### gpu label 이 설정된 node에 pod 생성하기
 ~~~yaml
 apiVersion: v1
 kind: Pod
@@ -116,3 +116,9 @@ $ kubectl get po pod-in-gpu-node -o wide
 ~~~
 
 ![node label gpu](./img/node-label-gpu-result.png)
+
+##### label 사용하여 pod 정리하기
+~~~sh
+$ kubectl delete po -l env  # env label이 있는 pod 전부 삭제
+$ kubectl delete po --all   # pod 전부 삭제
+~~~
