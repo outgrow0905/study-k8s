@@ -1,12 +1,12 @@
 ## namespace
 앞에서 label에 대해서 살펴보았다. 다음과 같은 예시를 생각해보자.  
-ex1) '여러 사용자가 동일한 클러스터를 사용하는데, 내가 사용한 pod name이 다른 사용자와 충돌한 경우' 
+ex1) '여러 사용자가 동일한 클러스터를 사용하는데, 내가 사용한 Pod name이 다른 사용자와 충돌한 경우' 
 ex2) '여러 부서에서 동일한 클러스터를 사용하는데, label이 겹치는 경우'  
 사용자 별, 혹은 부서 별로 독립된 환경에서 클러스터를 사용하는 것이 효율적일 것이다.  
 
 #### namespace 조회
 namespace를 조회해보면, 이미 몇 개가 생성되어 있는 것을 볼 수 있다.  
-기존에 테스트로 생성한 pod들은 전부 default namespace에 생성된다.  
+기존에 테스트로 생성한 Pod들은 전부 default namespace에 생성된다.  
 또한, 시스템 관련 리소스들은 전부 kube-system namespace로 생성된 것도 확인할 수 있다.
 
 ![namespace](./img/namespace.png)
@@ -14,7 +14,7 @@ namespace를 조회해보면, 이미 몇 개가 생성되어 있는 것을 볼 �
 ~~~sh
 $ kubectl get ns                    # namespace 확인
 $ kubectl get po                    # namespace를 명시하지 않으면 자동으로 default namespace로 조회한다.
-$ kubectl get po -n kube-system     # 클러스터 세팅관련 pod 들은 kube-system namespace에서 조회된다.
+$ kubectl get po -n kube-system     # 클러스터 세팅관련 Pod 들은 kube-system namespace에서 조회된다.
 ~~~
 
 
@@ -25,7 +25,7 @@ $ kubectl create ns my-namespace
 
 
 
-#### namespace에 pod 생성하기
+#### namespace에 Pod 생성하기
 ~~~yaml
 apiVersion: v1
 kind: Pod

@@ -1,6 +1,6 @@
 ## liveness probe
 k8s에서는 기본적으로 컨테이너의 상태를 체크하여, crash 가 발생할 경우 자동으로 이를 재시작한다.  
-하지만, 어플리케이션에 일부 버그가 있어 pod가 비정상상태로 유지된 경우는 어떻게 대처할 수 있을까?  
+하지만, 어플리케이션에 일부 버그가 있어 Pod가 비정상상태로 유지된 경우는 어떻게 대처할 수 있을까?  
 컨테이너 자체는 정상상태이기 때문에 이를 인지할 수 있는 방안을 마련해야 한다.  
 
 liveness probe를 사용해보자.
@@ -11,7 +11,7 @@ liveness probe는 세 가지로 세팅할 수 있다.
 http get, tcp, exec 조건이다.
 
 http get은 지정한 ip, port로 http get 요청을 보내고 응답 코드를 체크한다.  
-tcp는 지정된 컨테이너로 tcp 3-way handshake 성공여부로 pod의 상태를 체크한다.  
+tcp는 지정된 컨테이너로 tcp 3-way handshake 성공여부로 Pod의 상태를 체크한다.  
 exec는 컨테이너 내부에서 지정된 명령어를 사용하고 종료상태코드를 체크한다.
 
 #### http get
@@ -30,7 +30,7 @@ spec:
         path: /
 ~~~
 
-pod를 조회해보면, liveness 에 다른 조건들을 설정할 수 있다는 것을 알 수 있다.
+Pod를 조회해보면, liveness 에 다른 조건들을 설정할 수 있다는 것을 알 수 있다.
 
 delay=0s: 컨테이너 시작 후, 0초 후에 liveness probe가 작동한다.  
 timeout=1s: 응답 제한시간이 1초이다.  
