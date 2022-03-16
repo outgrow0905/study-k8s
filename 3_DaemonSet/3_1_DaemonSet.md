@@ -1,6 +1,7 @@
 ## DaemonSet
 DaemonSet은 모든 (혹은 일부) node에서 Pod 가 실행될 수 있도록 보장한다.   
-클러스터에 node가 추가/삭제되면, Pod도 같이 추가//삭제된다. DaemonSet을 삭제한다면, DaemonSet이 생성한 모든 Pod를 같이 제거한다.
+클러스터에 node가 추가/삭제되면, Pod도 같이 추가/삭제된다.   
+DaemonSet을 삭제한다면, DaemonSet이 생성한 모든 Pod를 같이 제거한다.
 
 클러스터 스토리지, 로그 수집, 모니터링 등의 daemon을 실행할 필요가 있을때에 유용하다.
 
