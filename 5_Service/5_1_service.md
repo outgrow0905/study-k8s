@@ -108,10 +108,48 @@ kube-system namespace로 생성된 Pod를 조회하면 codedns를 확인할 수 
 
 
 ## ServiceTypes
+Service는 클러스터 내부에서만 사용될 수도 있고, 외부로의 공개가 필요할 수도 있다.  
+혹은, 외부의 사이트 (ex. www.naver.com) 를 마치 kubernetes 의 서비스처럼 이용하고 싶을 수도 있다.  
+
+```ClusterIP```, ```NodePort```, ```LoadBalancer```, ```ExternalName``` 으로 구성이 가능하다.
+
+- ClusterIP: default 이다. 클러스터 내부에서만 사용할 수 있다.  
+- NodePort: 클러스터에 소속된 모든 node에 같은 port를 오픈한다. 이를 통해, <NodeIP>:<NodePort> 의 경로로 외부에서 Service로 접근할 수 있다.  
+- LoadBalancer: 클라우드 서비스(ex. aws)에서 제공하는 기능이다. 각 클라우드 서비스에서 자동으로 load balancer를 생성하여, ```NodePort```로 라우팅한다.
+- ExternalName: 외부의 사이트를 마치 kubernetes의 서비스처럼 이용할 수 있다. 예를 들어 www.naver.com을 마지 클러스터 내부에서 naver 라는 이름의 Service로 등록된 것처럼 이용할 수 있다. 클러스터 내부에서 ```CNAME``` 을 등록하기 때문에 가능하다.
 
 
+#### NodePort
+NodePort가 할당하는 port의 기본 범위는 30000-32767 이며, 이는 ```--service-node-port-range``` 으로 조절이 가능하다.  
+혹은, Service 생성 시 ```spec.ports[*].nodePort``` 필드로 할당할 수도 있다.
+또한, 지정한 port-range 내에서 특정 port를 할당하고 싶다면 Service 생성 스크립트의 nodePort 필트를 사용하면 된다.
 
-## Shortcomings
+특정 ip 범위를 할당하고 싶다면, kube-proxy 의 ```--nodeport-addresses```를 통해 ip 범위를 지정할 수 있다. ```(ex. --nodeport-addresses=127.0.0.0/8)```
+
+~~~yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: NodePort
+  selector:
+    app: MyApp
+  ports:
+      # targetPort를 지정하지 않는다면, port 와 동일한 값을 자동으로 세팅한다.
+    - port: 80
+      targetPort: 80
+      # Optional field
+      # 지정하지 않는다면 default: 30000-32767 범위 내에서 자동으로 할당한다.
+      nodePort: 30007
+~~~
+
+#### LoadBalancer
+클라우드 사업자가 제공하는 기능이다.  
+외부의 트레픽은 Pod로 바로 전송된다. 따라서, 외부에서만 접근되는 Service라면 사실상 NodePort는 필요가 없다.  
+
+그래서 이러한 경우 NodePort를 자동으로 할당하는 기능을 제어할 수 있다. ```spec.allocateLoadBalancerNodePorts``` 를 ```false``` 로 설정하면 된다.  
+default는 ```true```이다. 주의할 점은 이미 생성된 Service의 스펙을 ```false```로 설정하더라도 기생성된 NodePort를 제거하지는 않는다는 점이다.
 
 
 ## References
