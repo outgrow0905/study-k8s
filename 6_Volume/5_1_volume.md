@@ -89,9 +89,55 @@ spec:
 그리고 `web-server` 컨테이너는 `/usr/share/nginx/html` 경로를 읽는다.
 두 컨테이너의 `/var/htdocs` 경로와 `/usr/share/nginx/html` 경로는 공유 volume 이다. 
 
-## nfs
+## Persistent Volume(pv), Persistent Volume Claim(pvc)
+이상적으로 kubernetes에 어플리케이션을 배포하는 개발자는 어떤 종류의 스토리지 기술이 사용되는 지 알 필요가 없다.    
+필요한 스토리지의 유형(ssd, hdd), 크기, 읽기/쓰기 모드 정도이면 충분할 것이다.  
+실제 스토리지가 어디에 위치하고 있고, 어떤 스펙으로 구성되어있는지 인프라관련 지식은 전혀 알 필요가 없다.
 
-
+~~~yaml
+apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: my-nas
+  spec:
+    capacity:
+      storage: 500Gi
+    volumeMode: Filesystem
+    accessModes:
+      - ReadWriteMany
+    persistentVolumeReclaimPolicy: Recycle
+    nfs:
+      path: /n2532613_kube
+      server: 169.254.82.86  
+---
+apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: my-nas-pvc
+  spec:
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 5Gi
+---
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    name: nas-mount-container
+  spec:
+    containers:
+      - name: nas-mount-container
+        image: busybox
+        args: ["tail", "-f", "/dev/null"]
+        volumeMounts:
+          - name: my-nas
+            mountPath: /mnt
+    volumes:
+    - name: my-nas
+      persistentVolumeClaim:
+        claimName: my-nas-pvc
+~~~
 
 
 ## Reference
