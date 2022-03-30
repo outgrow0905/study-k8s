@@ -20,6 +20,35 @@ Pod에서 ConfigMap을 사용하는 네 가지 방식이 있다.
 이를 반드시 숙지하고 개발해야 할 것이다.  
 API를 통한 ConfigMap 접근의 장점 중 하나는 다른 namespace의 ConfigMap에도 접근할 수 있다는 부분이다. 
 
+#### Pod와 Secret
+이미 우리는 인지하지 못한 채 Secret을 사용하고 있었다. Pod 생성시에 Secret을 사용하고 있었기 때문이다.    
+Pod는 kubernetes api server와 통신하기 위해 Secret을 포함해야 한다.
+
+생성된 임의의 Pod를 살펴보자.   
+Pod 생성시에 `kube-root-ca.crt` 가 `/var/run/secrets/kubernetes.io/serviceaccount`애 mount 되고 있었다.
+
+~~~
+$ kubectl describe po my-pod
+
+...
+Containers:
+  my-pod:
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jjglb (ro)
+...
+Volumes:
+  kube-api-access-jjglb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+...
+
+$ kubectl exec my-pod -- ls /var/run/secrets/kubernetes.io/serviceaccount
+ca.crt
+namespace
+token
+~~~
+
 #### example
 #### cmd로 ConfigMap 생성
 ~~~
