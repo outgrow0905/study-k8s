@@ -13,6 +13,8 @@ $ echo bar > foo
 $ kubectl create secret generic fortune-https --from-file=https.key --from-file=https.crt --from-file=foo
 ~~~
 
+nginx가 ssl을 지원하도록 설정한다.
+
 ~~~
 $ vi my-nginx-config.conf
 
@@ -36,6 +38,8 @@ server {
 
 $ kubectl create configmap fortune-config-https --from-file=my-nginx-config.conf
 ~~~
+
+Pod 생성시에 secret volume 을 mount하여 설정한 경로에 ssl 관련 데이터가 mount되도록 한다. 
 
 ~~~
 $ vi fortune-https.yaml
