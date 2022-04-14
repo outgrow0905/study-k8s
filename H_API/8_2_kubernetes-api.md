@@ -102,7 +102,7 @@ $ root@my-pod:/# export CURL_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceacc
 $ root@my-pod:/# export TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 $ root@my-pod:/# curl -H "Authorization: Bearer $TOKEN" https://kubernetes
 ~~~
-혹시 안된다면:q
+혹시 안된다면
 ~~~
 $ kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --group=system:serviceaccounts
 ~~~
