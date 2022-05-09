@@ -60,6 +60,6 @@ Save & Test 를 클릭하고 아래와 같이 팝업이 뜬다면 설정성공�
 데이터를 어떤 방식으로 보여줄 지 dashboard를 설정해야 한다.
 prometheus는 7249나 8685를 범용적으로 사용한다.
 
+![grafana config](./img/grafana-config-3.png)
 ![grafana config](./img/grafana-config-4.png)
-![grafana config](./img/grafana-config-5.png)
-![grafana config](./img/grafana-config-6.png)
+![grafana config](img/grafana-config-5.png)
