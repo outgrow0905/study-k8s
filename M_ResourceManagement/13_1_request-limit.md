@@ -84,7 +84,7 @@ spec:
 자바 어플리케이션을 예로 들면, `-Xms` 옵션을 50Mi로 설정했다면, 실제 어플리케이션은 필요한 경우 50Mi 만큼의 메모리를 할당하려고 시도할 것이다.  
 그리고, kubelet은 이를 감지하고, `OOMKilled` 메세지와 함께 해당 컨테이너를 재시작 할 것이다.  
 그렇다면, `-Xms` 옵션만 잘 세팅하면 될까? 아니다. 이는 심지어 `off-heap` 은 반영하지 않은 값이다. 
-하지만, JVM 1.8 이상버전부터는 -XX:+UseCGroupMemoryLimitForHeap 옵션을 통해, 컨테이너의 메모리를 최대 Heap 크기로 설정하여 할당하는게 가능해졌다.
+하지만, JVM 1.8 이상버전부터는 `-XX:+UseCGroupMemoryLimitForHeap` 옵션을 통해, 컨테이너의 메모리를 최대 Heap 크기로 설정하여 할당하는게 가능해졌다.
 
 
 ## Reference
