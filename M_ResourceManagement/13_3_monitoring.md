@@ -313,7 +313,8 @@ spec:
 
 #### step3: metric-server 이용해보기
 step2에서 생성된 `metrics-server` Pod는 여러가지 권한(step2 참조)을 이용하여 클러스터 내 모든 노드의 kubelet(`cAdvisor` 내장)으로부터 metric을 수집할 것이다.
-`metrics-server`는 각 노드의 kubelet에 의해 외부로 제공되는 `Summary API`로 metric을 수집한다. 
+`metrics-server`는 각 노드의 kubelet에 의해 외부로 제공되는 API로 metric을 수집한다. 
+0.6.0+ 버전부터는 `/metrics/resource` 경로로 이용한다. 이전 버전은 `/stats/summary` 의 경로를 이용한다.
 
 ~~~
 $ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodes"
