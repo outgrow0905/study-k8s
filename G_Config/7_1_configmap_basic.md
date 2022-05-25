@@ -1,5 +1,5 @@
 ## Docker CMD & ENTRYPOINT
-docker CMD 명령과 ENTRYPOINT 명령을 이해해보자.
+docker `CMD` 명령과 `ENTRYPOINT` 명령을 이해해보자.
 
 #### example
 INTERVAL 변수를 받을 수 있도록 fortune 스크립트를 수정해보자.
@@ -38,7 +38,14 @@ $ docker run -it outgrow0905/fortune:args 2  ## 환경변수 2초로 세팅하�
 
 ## kubernetes command & args
 kubernetes에서 실행하려는 컨테이너를 정의할 때에 command와 args를 통해, ENTRYPOINT와 CMD를 재정의 할 수 있다.  
-command는 ENTRYPOINT에 매칭되고, args는 CMD에 매칭된다.
+
+`command`는 `ENTRYPOINT`에 매칭되고, `args`는 `CMD`에 매칭된다.
+이 말은, `command`는 `ENTRYPOINT`를 덮어쓰고, `args`는 `CMD`를 덮어쓴다는 의미이다.  
+`command`가 `CMD`를 덮어써야 할 것 같은데, 그렇지 않다. 잘 구분하자.
+
+`ENTRYPOINT ["sleep"]`, `args: ["2"]` 이면, `sleep 2` 의 명령어로 이미지가 실행될 것이다.  
+`ENTRYPOINT ["sleep"]`, `command: ["echo", "hello"]`이면, `sleep` 명령어는 무시되고 `echo hello`의 명령어만 실행될 것이다.  
+`ENTRYPOINT ["sleep"]`이 있는데 `CMD`와 `args`로 아무것도 전달하지 않는다면, 오류가 날 것이다. 
 
 ~~~yaml
 apiVersion: v1
