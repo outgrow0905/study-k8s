@@ -30,8 +30,23 @@ kubelet 설정파일이 저기 경로에 있는 것 같다. 파일을 실제로 
 
 
 ## example
- 
+`/etc/kubernetes/manifests` 에 Pod를 생성해보자.
 
+~~~yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+~~~
+
+즉시 아래 Pod가 생성된다.  
+특징으로는 이름 뒤에 host의 이름이 붙는 것을 알 수 있다.
+
+![static pod](./img/static-pod.png)
 
 
 
