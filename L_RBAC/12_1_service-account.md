@@ -192,8 +192,8 @@ $ kubectl exec -it test -n bar -- curl localhost:8001/api/v1/namespaces/foo/serv
 그렇다면, namespace 생성시마다 똑같은 Role을 계속해서 만들어주어야 할 것이다. 
 
 ## ClusterRole & ClusterRoleBinding
-ClusterRole은 Namespaced되지 않는 kubenetes 리소스를 제어하기 위한 것이다. 대략적인 사용은 위의 Role & RoleBinding과 비슷하다.  
-다만, ClusterRole은 단지 Namespaced되지 않는 리소스만을 위한것은 아니다. 
+ClusterRole은 Namespaced 되지 않는 kubenetes 리소스를 제어하기 위한 것이다. 대략적인 사용은 위의 Role & RoleBinding과 비슷하다.  
+다만, ClusterRole은 단지 Namespaced 되지 않는 리소스만을 위한것은 아니다. 
 
 ClusterRole에 Namespaced 리소스를 바인딩하는 것은 어떤 의미일까?  
 ClusterRole을 RoleBing하는 것은 어떤 의미일까?
