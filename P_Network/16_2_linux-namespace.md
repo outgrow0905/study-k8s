@@ -7,7 +7,7 @@ host1: 192.168.100.8/24
 host2: 192.168.100.9/24
 ~~~
 
-##### 하나의 호스트에서 두 개의 network namespace를 생성하고 namespace간 통신가능하도록 설정
+### 하나의 호스트에서 두 개의 network namespace를 생성하고 namespace간 통신가능하도록 설정
 두 개의 network namespace 생성
 ~~~
 $ ip netns add red
@@ -101,19 +101,34 @@ $ ip link set veth-red netns red # veth-red 이더넷을 red namespace에 할당
 $ ip link set veth-red-br master v-net-0 # veth-red-br 브릿지를 v-net-0 와 연결한다.
 $ ip -n red addr add 192.168.15.1/24 dev veth-red # veth-red 이더넷에 아이피를 할당한다.
 $ ip -n red link set veth-red up # veth-red 이더넷을 활성화한다.
+$ ip link set up dev veth-red-br # veth-red-br 브릿지를 활성화한다.
 
 $ ip link add veth-blue type veth peer name veth-blue-br
 $ ip link set veth-blue netns blue
 $ ip link set veth-blue-br master v-net-0
 $ ip -n blue addr add 192.168.15.2/24 dev veth-blue
 $ ip -n blue link set veth-blue up
+$ ip link set up dev veth-blue-br
 ~~~ 
 
 ![exercise 7](./img/exercise-7.png)
 
 위의 설정은 브릿지를 두고 namespace간의 통신이 가능하도록 하는 설정들이다.
-host로부터 namespace로 통신이 가능하지는 않다. 이를 위해서는 아래의 설정을 한다.
+host로부터 namespace로 통신이 가능하지는 않다. 
+현재 아래의 통신은 불가능하다. 
+
+~~~
+$ ping 192.168.15.1
+~~~
+
+이를 위해서는 아래의 설정을 한다.
 
 ~~~
 $ ip addr add 192.168.15.5/24 dev v-net-0
 ~~~
+
+
+## namespace에서 다른 호스트와 통신하기 
+위의 예시를 통해 호스트 내에서 브릿지를 통해 namespace간 통신, 호스트와 namespace간의 통신에 대하여 연습헀다.    
+특정 호스트 내의 namespace에서 다른 호스트와의 통신을 하려면 어떻게 해야 할까? 
+
