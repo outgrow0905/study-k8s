@@ -1,1 +1,1 @@
-<embed src="Z_CKA/img/k8s-cert.pdf" type="application/pdf">
+[embed]https://github.com/outgrow0905/study-k8s/files/9005821/cka.pdf[/embed]
