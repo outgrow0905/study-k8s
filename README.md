@@ -1,1 +1,1 @@
-[k8s-cert.pdf](https://github.com/outgrow0905/study-k8s/files/9005713/k8s-cert.pdf)
+![k8s-cert.pdf](Z_CKA/img/k8s-cert.pdf)
