@@ -1,1 +1,1 @@
-[embed]https://github.com/outgrow0905/study-k8s/files/9005821/cka.pdf[/embed]
+[embed]/Z_CKA/img/cka.pdf[/embed]
