@@ -1,1 +1,1 @@
-[embed]/Z_CKA/img/cka.pdf[/embed]
+![CKA CERTIFICATE](/Z_CKA/img/cka.pdf)
