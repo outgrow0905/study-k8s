@@ -1,6 +1,6 @@
 <html>
 <head></head>
 <body>
-<embed src="Z_CKA/img/k8s-cert.pdf" type"application/pdf">
+<object data="Z_CKA/img/k8s-cert.pdf" type="application/pdf" width="100%">
 </body>
 </html>
