@@ -1,1 +1,3 @@
-![k8s-cert.pdf](Z_CKA/img/k8s-cert.pdf)
+<html>
+<embed src="Z_CKA/img/k8s-cert.pdf" type"application/pdf">
+</html>
