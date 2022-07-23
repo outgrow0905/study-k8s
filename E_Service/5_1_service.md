@@ -80,7 +80,7 @@ Pod 입장에서 다른 Service를 어떻게 알 수 있을까?
 kubernetes는 두 가지 방법을 제공한다.   
 
 #### Environment variables
-Pod를 실행시킬 때에 kubelet은 활성화된 모든 Service의 host와 port를 황경변수로 추가한다. ```{SVCNAME}_SERVICE_HOST```와 ```{SVCNAME}_SERVICE_PORT```이다.  
+Pod를 실행시킬 때에 kubelet은 활성화된 모든 Service의 host와 port를 환경변수로 추가한다. ```{SVCNAME}_SERVICE_HOST```와 ```{SVCNAME}_SERVICE_PORT```이다.  
 Service를 먼저 생성했다고 가정하고 Pod를 실행하면 Service에 해당하는 환경변수들이 주입된다.  
 환경변수는 Pod가 생성되기 전에 Service가 먼저 생성되어 있어야 주입된다. DNS를 사용한다면 이러한 문제를 걱정하지 않아도 된다.  
 
@@ -114,7 +114,7 @@ Service는 클러스터 내부에서만 사용될 수도 있고, 외부로의 �
 ```ClusterIP```, ```NodePort```, ```LoadBalancer```, ```ExternalName``` 으로 구성이 가능하다.
 
 - ClusterIP: default 이다. 클러스터 내부에서만 사용할 수 있다.  
-- NodePort: 클러스터에 소속된 모든 node에 같은 port를 오픈한다. 이를 통해, <NodeIP>:<NodePort> 의 경로로 외부에서 Service로 접근할 수 있다.  
+- NodePort: 클러스터에 소속된 모든 node에 같은 port를 오픈한다. 이를 통해, \<NodeIP\>:\<NodePort\> 의 경로로 외부에서 Service로 접근할 수 있다.  
 - LoadBalancer: 클라우드 서비스(ex. aws)에서 제공하는 기능이다. 각 클라우드 서비스에서 자동으로 load balancer를 생성하여, ```NodePort```로 라우팅한다.
 - ExternalName: 외부의 사이트를 마치 kubernetes의 서비스처럼 이용할 수 있다. 예를 들어 www.naver.com을 마지 클러스터 내부에서 naver 라는 이름의 Service로 등록된 것처럼 이용할 수 있다. 클러스터 내부에서 ```CNAME``` 을 등록하기 때문에 가능하다.
 
