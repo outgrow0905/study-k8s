@@ -11,6 +11,9 @@ $ ls /etc/kubernetes/manifests
 
 ![manifests](./img/manifests.png)
 
+<img width="974" alt="스크린샷 2022-07-23 오후 1 53 57" src="https://user-images.githubusercontent.com/38313166/180591015-39836e5d-f945-4a9b-bf60-13849d58ae40.png">
+
+
 ## etcd
 `etcd`는 key-value 데이터베이스이며, kubernetes의 마스터 노드에 위치하여 각종 정보들을 저장한다.  
 `etcd`는 오픈소스이며, kubernetes 설치 시에 Pod로 생성하지 않고 별도의 서버에 세팅할 수도 있다.
@@ -34,7 +37,7 @@ $ vi /etc/kubernetes/manifests/kube-apiserver.yaml
 ## controller manager
 `controller manager`는 여러개의 구성요소로 되어있으며, 각각 담당하는 영역이 정해져 있다. 
 
-예를 들어, 노드 담당 `controller manager`는 노드의 상태를 계속해서 모니터링하고 적절한 액션을 취한다. 
+예를 들어, 노드 담당 `Node controller`는 노드의 상태를 계속해서 모니터링하고 적절한 액션을 취한다. 
 각 노드는 `api-server`에 계속해서 hearbeat를 보내고, `controller manager`는 `api-server`에 5초마다 상태를 요청하여 정보를 얻는다.
 만약, hearbeat가 실패하면 노드의 상태를 비정상상태 (이 경우는 Unreachable) 로 변경하고, 약간의 대기시간(Node Monitor Grace Period)이 지나면,
 Pod의 evict 대기시간까지 기다려준 뒤에, Pod들을 다른 정상노드로 이전한다.
@@ -64,4 +67,5 @@ $ vi /etc/kubernetes/manifests/kube-scheduler.yaml
 ~~~
 
 ## Reference
+- https://kubernetes.io/docs/concepts/overview/components/
 - https://github.com/etcd-io/etcd
