@@ -83,7 +83,7 @@ label은 Pod에만 설정할 수 있는 것이 아니다. k8s 오브젝트에는
 kubectl get node --show-labels
 ~~~
 
-![node label all](./img/node-label-all.png)
+![node label all](./img/node-label.png)
 
 #### node label 설정
 ~~~
