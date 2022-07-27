@@ -1,1 +1,1 @@
-![CKA CERTIFICATE](/Z_CKA/img/cka.png)
+
